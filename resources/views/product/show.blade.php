@@ -3,24 +3,27 @@
 @section('subtitle', $viewData["subtitle"])
 @section('content')
 <div class="card mb-3">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="https://laravel.com/img/logotype.min.svg" class="img-fluid rounded-start">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="https://laravel.com/img/logotype.min.svg" class="img-fluid rounded-start">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+            <h5 class="card-title">
+                @if ($viewData["product"]["price"] > 100)
+                    <span class="badge bg-danger">{{ $viewData["product"]["name"] }}</span>
+                @else
+                    {{ $viewData["product"]["name"] }}
+                @endif
+            </h5>
+                <div class="card-body">
+                    <p class="card-text">{{ $viewData["product"]["price"] }}$</p>
+                    <p class="card-text">{{ $viewData["product"]["description"] }}</p>
+                </div>
+                    @foreach($viewData["product"]->comments as $comment)
+                    - {{ $comment->getDescription() }}<br />
+                    @endforeach
+            </div>
     </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">
-            @if ($viewData["product"]["price"] > 100)
-                <span class="badge bg-danger">{{ $viewData["product"]["name"] }}</span>
-            @else
-                {{ $viewData["product"]["name"] }}
-            @endif
-        </h5>
-        <div class="card-body">
-          <p class="card-text">{{ $viewData["product"]["price"] }}$</p>
-        <p class="card-text">{{ $viewData["product"]["description"] }}</p>
-      </div>
-    </div>
-  </div>
 </div>
 @endsection
